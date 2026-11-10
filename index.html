@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="./assets/img/favicon.ico">
+		<title>Home Page</title>
+		<script type="module" crossorigin="" src="./js/index.min.js?v=1794339595865"></script>
+		<link rel="stylesheet" crossorigin="" href="./css/index.min.css?v=1794339595865">
+	</head>
+	<body>
+		<div class="wrapper">
+			<header data-fls-header="" class="header">
+				<div class="header__container">
+					<div class="header__menu menu">
+						<a href="#" class="menu__logo">
+							<img src="./assets/img/logo.svg" alt="logo">
+							<span>pro.runes</span>
+						</a>
+						<nav class="menu__body">
+							<ul class="menu__list">
+								<li class="menu__item">
+									<a href="#" class="menu__link">Головна</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link">Про мене</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link">Розклад</a>
+								</li>
+								<!--
+<li class="menu__item">
+<a href="#" class="menu__link">Відгуки</a>
+</li>
+-->
+								<li class="menu__item">
+									<a href="#" class="menu__link">FAQ</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link menu__link--contact">Контакти</a>
+								</li>
+							</ul>
+						</nav>
+						<button type="button" data-fls-menu="" class="menu__icon icon-menu">
+							<span></span>
+						</button>
+					</div>
+					<!--
+<fetch url="@components/layout/menu/menu.json">
+<each loop='item in response'>
+</each>
+</fetch>
+-->
+				</div>
+			</header>
+			<canvas class="sky" id="sky" aria-hidden="true"></canvas>
+			<main class="page page--index">
+				<div class="page__container"></div>
+			</main>
+			<footer data-fls-footer="" class="footer">
+				<div class="footer__container"></div>
+			</footer>
+		</div>
+	</body>
+</html>
