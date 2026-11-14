@@ -80,6 +80,7 @@ body {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 1.125rem;
   background: radial-gradient(ellipse 55% 45% at 5% 100%, rgba(100, 60, 170, 0.14), transparent 70%), #03050c;
+  background-attachment: fixed;
 }
 [data-fls-scrolllock] body {
   overflow: hidden;
@@ -184,11 +185,153 @@ body {
   height: 100%;
   pointer-events: none;
 }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.375rem;
+  padding: 0 2rem;
+  border-radius: 6.1875rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s, color 0.3s;
+}
+.btn--primary {
+  background: linear-gradient(90deg, #e2742a 0%, #f0b443 100%);
+  color: #150f08;
+  box-shadow: 0 0 1.875rem rgba(226, 116, 42, 0.25);
+}
+.btn--primary:hover {
+  box-shadow: 0 0 2.75rem rgba(226, 116, 42, 0.45);
+  transform: translateY(-0.0625rem);
+}
+.btn--outline {
+  border: 0.0625rem solid rgba(226, 160, 70, 0.42);
+  color: #ece3d0;
+}
+.btn--outline:hover {
+  border-color: #f0b443;
+  color: #f0b443;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+.hero::before, .hero::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  z-index: -1;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+.hero::before {
+  top: -7.75rem;
+  width: min(93.75rem, 100vw);
+  height: 65.625rem;
+  background: radial-gradient(ellipse 50% 50% at 50% 42%, rgba(240, 180, 67, 0.16) 0%, rgba(226, 116, 42, 0.08) 38%, transparent 72%);
+}
+.hero::after {
+  top: 7.5rem;
+  width: min(47.5rem, 100vw);
+  height: 32.5rem;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(247, 199, 90, 0.12), transparent 70%);
+  animation: hero-glow 7s ease-in-out infinite;
+}
+.hero__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 53.75rem;
+  margin: 0 auto;
+  padding: 6.875rem 1.25rem 8.75rem;
+  text-align: center;
+}
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-transform: uppercase;
+  color: #f0b443;
+}
+.hero__eyebrow::before, .hero__eyebrow::after {
+  content: "";
+  width: 2.125rem;
+  height: 0.0625rem;
+  background: rgba(240, 180, 67, 0.6);
+}
+.hero__emblem {
+  width: 8.25rem;
+  height: 8.25rem;
+  margin: 1.875rem 0 2.125rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #03050c 0 66%, transparent 67%);
+}
+.hero__emblem img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 0 0.875rem rgba(240, 180, 67, 0.35)) drop-shadow(0 0 2.5rem rgba(226, 116, 42, 0.25));
+}
+.hero__title {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  line-height: 0.98;
+}
+.hero__title-line {
+  display: block;
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  letter-spacing: 0.02em;
+  color: #ece3d0;
+}
+.hero__title-accent {
+  display: block;
+  font-size: clamp(3.375rem, 8.6vw, 6.75rem);
+  font-style: italic;
+  background: linear-gradient(180deg, #f7c75a 0%, #e2742a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero__divider {
+  display: block;
+  width: 3.75rem;
+  height: 0.0625rem;
+  margin: 1.875rem 0;
+  background: linear-gradient(90deg, transparent, #f0b443, transparent);
+}
+.hero__text {
+  max-width: 40rem;
+  margin: 0 0 2.75rem;
+  font-size: 1.25rem;
+  line-height: 1.75;
+  color: #a39882;
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@keyframes hero-glow {
+  0%, 100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 @media (max-width: 47.99875em) and (any-hover: none){
   .icon-menu {
     cursor: default;
   }
 }
+
 @media (max-width: 47.99875em){
   .menu__body {
     position: fixed;
@@ -261,5 +404,15 @@ body {
   [data-fls-menu-open] .icon-menu::after {
     bottom: calc(50% - 0.0625rem);
     transform: rotate(45deg);
+  }
+  .hero__emblem {
+    background-color: #fff;
+  }
+  .hero__emblem {
+    width: 6.875rem;
+    height: 6.875rem;
+  }
+  .hero__actions {
+    display: grid;
   }
 }
