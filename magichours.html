@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- <link rel="shortcut icon" href="@img/favicon.ico"> -->
+		<link rel="icon" type="image/png" href="./assets/img/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/svg+xml" href="./assets/img/favicon.ico">
+		<link rel="shortcut icon" href="./assets/img/favicon.ico">
+		<link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">
+		<title>Magichours</title>
+		<script type="module" crossorigin="" src="./js/magichours.min.js?v=1795457553662"></script>
+		<link rel="modulepreload" crossorigin="" href="./js/main.min.js?v=1795457553662">
+		<link rel="stylesheet" crossorigin="" href="./css/main.min.css?v=1795457553662">
+		<link rel="stylesheet" crossorigin="" href="./css/magichours.min.css?v=1795457553662">
+	</head>
+	<body>
+		<div class="wrapper">
+			<header data-fls-header="" class="header">
+				<div class="header__container">
+					<div class="header__menu menu">
+						<a href="#" class="menu__logo">
+							<img src="./assets/img/logo.svg" alt="logo">
+							<span>pro.runes</span>
+						</a>
+						<nav class="menu__body">
+							<ul class="menu__list">
+								<li class="menu__item">
+									<a href="#" class="menu__link">Головна</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link">Про мене</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link">Розклад</a>
+								</li>
+								<!--
+<li class="menu__item">
+<a href="#" class="menu__link">Відгуки</a>
+</li>
+-->
+								<li class="menu__item">
+									<a href="#" class="menu__link">FAQ</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link menu__link--contact">Контакти</a>
+								</li>
+							</ul>
+						</nav>
+						<button type="button" data-fls-menu="" class="menu__icon icon-menu">
+							<span></span>
+						</button>
+					</div>
+					<!--
+<fetch url="@components/layout/menu/menu.json">
+<each loop='item in response'>
+</each>
+</fetch>
+-->
+				</div>
+			</header>
+			<main class="page page--magichours">
+				<section class="ph">
+					<div class="ph__container">
+						<div class="section-head">
+							<div class="section-label section-label--center">Інструменти</div>
+							<h1 class="section-title section-title--center">
+								Планетарні
+								<em>години</em>
+							</h1>
+							<span class="section-divider" aria-hidden="true"></span>
+							<p class="section-sub">
+								Оберіть місто й дату — я розрахую схід і захід сонця, тривалість магічної години та володаря кожної з 24 годин доби.
+							</p>
+						</div>
+						<form class="ph__form" id="phForm" novalidate>
+							<label class="field">
+								<span class="field__label">Місто</span>
+								<span class="city">
+									<input class="field__input" type="text" id="phCity" placeholder="Дніпро, Днепр або Dnipro" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="phSuggest" required>
+									<ul class="city__list" id="phSuggest" role="listbox" hidden></ul>
+								</span>
+							</label>
+							<label class="field">
+								<span class="field__label">Дата</span>
+								<input class="field__input" type="date" id="phDate" required>
+							</label>
+							<button class="btn btn--primary ph__submit" type="submit" id="phBtn">Розрахувати</button>
+						</form>
+						<p class="ph__message" id="phMessage" role="status" aria-live="polite" hidden></p>
+						<div class="ph__result" id="phResult" hidden>
+							<div class="ph__place" id="phPlace"></div>
+							<ul class="ph__stats">
+								<li class="ph-stat">
+									<span class="ph-stat__label">Схід сонця</span>
+									<span class="ph-stat__value" id="phSunrise"></span>
+								</li>
+								<li class="ph-stat">
+									<span class="ph-stat__label">Захід сонця</span>
+									<span class="ph-stat__value" id="phSunset"></span>
+								</li>
+								<li class="ph-stat">
+									<span class="ph-stat__label">Денна година</span>
+									<span class="ph-stat__value" id="phDayLen"></span>
+								</li>
+								<li class="ph-stat">
+									<span class="ph-stat__label">Нічна година</span>
+									<span class="ph-stat__value" id="phNightLen"></span>
+								</li>
+							</ul>
+							<div class="ph__ruler" id="phRuler"></div>
+							<div class="ph__tables">
+								<div class="ph-table">
+									<div class="ph-table__title">
+										<span class="ph-table__icon" aria-hidden="true">☉</span>
+										Денні години
+									</div>
+									<ol class="ph-table__list" id="phDay"></ol>
+								</div>
+								<div class="ph-table">
+									<div class="ph-table__title">
+										<span class="ph-table__icon" aria-hidden="true">☽</span>
+										Нічні години
+									</div>
+									<ol class="ph-table__list" id="phNight"></ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+			<footer data-fls-footer="" class="footer">
+				<div class="footer__container">
+					<div class="footer__top">
+						<div class="footer__brand">
+							<a href="#top" class="footer__logo">✦ pro.runes ✦</a>
+							<p class="footer__tagline">
+								Рунічна магія північної традиції — ритуали, розклади та практики, перевірені на собі.
+							</p>
+						</div>
+						<div class="footer__col">
+							<div class="footer__title">Документи</div>
+							<a href="#" class="footer__link">Договір публічної оферти</a>
+							<a href="#" class="footer__link">Гарантія повернення та правила</a>
+							<a href="#" class="footer__link">Політика конфіденційності</a>
+						</div>
+						<div class="footer__col footer__col--right">
+							<div class="footer__title">Контакти</div>
+							<a href="mailto:safr1404@gmail.com" class="footer__link">safr1404@gmail.com</a>
+							<a href="https://t.me/pro_runes_samuraii" class="footer__link" target="_blank" rel="noopener">Telegram</a>
+							<a href="https://instagram.com/pro.runes" class="footer__link" target="_blank" rel="noopener">Instagram</a>
+						</div>
+					</div>
+					<div class="footer__bottom">
+						<span>© 2026 pro.runes. Усі права захищені.</span>
+						<a href="#top" class="footer__up">↑ На початок</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>
