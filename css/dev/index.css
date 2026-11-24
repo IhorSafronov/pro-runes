@@ -8,40 +8,6 @@
   pointer-events: none;
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 3.375rem;
-  padding: 0 2rem;
-  border-radius: 62.4375rem;
-  text-transform: uppercase;
-  white-space: nowrap;
-  font-family: "Manrope", system-ui, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s, color 0.3s;
-}
-.btn--primary {
-  background: linear-gradient(90deg, #e2742a 0%, #f0b443 100%);
-  color: #150f08;
-  box-shadow: 0 0 1.875rem rgba(226, 116, 42, 0.25);
-}
-.btn--primary:hover {
-  box-shadow: 0 0 2.75rem rgba(226, 116, 42, 0.45);
-  transform: translateY(-0.0625rem);
-}
-.btn--outline {
-  border: 0.0625rem solid rgba(226, 160, 70, 0.42);
-  color: #ece3d0;
-}
-.btn--outline:hover {
-  border-color: #f0b443;
-  color: #f0b443;
-}
-
 .hero {
   position: relative;
   isolation: isolate;
@@ -459,9 +425,6 @@
 }
 
 @media (max-width: 47.99875em) {
-  .btn {
-    width: 100%;
-  }
   .hero__container {
     padding: 4.375rem 1rem 5.625rem;
   }

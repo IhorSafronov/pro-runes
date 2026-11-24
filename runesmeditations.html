@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- <link rel="shortcut icon" href="@img/favicon.ico"> -->
+		<link rel="icon" type="image/png" href="./assets/img/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/svg+xml" href="./assets/img/favicon.ico">
+		<link rel="shortcut icon" href="./assets/img/favicon.ico">
+		<link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">
+		<title>Runesmeditations</title>
+		<script type="module" crossorigin="" src="./js/runesmeditations.min.js?v=1795555558293"></script>
+		<link rel="modulepreload" crossorigin="" href="./js/main.min.js?v=1795555558293">
+		<link rel="stylesheet" crossorigin="" href="./css/main.min.css?v=1795555558293">
+		<link rel="stylesheet" crossorigin="" href="./css/runesmeditations.min.css?v=1795555558293">
+	</head>
+	<body>
+		<div class="wrapper">
+			<header data-fls-header="" class="header">
+				<div class="header__container">
+					<div class="header__menu menu">
+						<a href="index.html" class="menu__logo">
+							<img src="./assets/img/logo.svg" alt="logo">
+							<span>pro.runes</span>
+						</a>
+						<nav class="menu__body">
+							<ul class="menu__list">
+								<li class="menu__item">
+									<a href="#" class="menu__link">Головна</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link">Про мене</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link">Розклад</a>
+								</li>
+								<!--
+<li class="menu__item">
+<a href="#" class="menu__link">Відгуки</a>
+</li>
+-->
+								<li class="menu__item">
+									<a href="#" class="menu__link">FAQ</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link menu__link--contact">Контакти</a>
+								</li>
+							</ul>
+						</nav>
+						<button type="button" data-fls-menu="" class="menu__icon icon-menu">
+							<span></span>
+						</button>
+					</div>
+					<!--
+<fetch url="@components/layout/menu/menu.json">
+<each loop='item in response'>
+</each>
+</fetch>
+-->
+				</div>
+			</header>
+			<main class="page page--runesmeditations">
+				<!-- ================= РУННА МЕДИТАЦІЯ ================= -->
+				<section class="md">
+					<div class="md__container">
+						<div class="section-head">
+							<div class="section-label section-label--center">Інструменти</div>
+							<h1 class="section-title section-title--center">
+								Рунна
+								<em>медитація</em>
+							</h1>
+							<span class="section-divider" aria-hidden="true"></span>
+							<p class="section-sub">
+								Введіть дату народження — і отримаєте особистий календар рунних медитацій. Кожна руна читається стільки днів, скільки означає її
+					число.
+							</p>
+						</div>
+						<!-- Крок 1: налаштування -->
+						<section class="md-card md-setup" id="setup">
+							<form class="md-form" id="form" novalidate>
+								<label class="field">
+									<span class="field__label">Дата народження</span>
+									<input class="field__input" type="text" id="dob" inputmode="numeric" pattern="[0-9.]*" maxlength="10" placeholder="ДД.ММ.РРРР" autocomplete="bday" required>
+									<span class="small">Просто вводьте цифри — крапки з’являться самі</span>
+								</label>
+								<label class="field">
+									<span class="field__label">Дата початку медитацій</span>
+									<input class="field__input" type="date" id="start" required>
+									<span class="small">Можна почати сьогодні або будь-коли пізніше</span>
+								</label>
+								<p class="error" id="err" hidden></p>
+								<button class="btn btn--primary md-form__submit" type="submit">Скласти мій календар</button>
+							</form>
+							<details class="md-restore">
+								<summary>Вже маєте код прогресу?</summary>
+								<div class="code-row">
+									<input class="field__input" type="text" id="restoreInput" placeholder="Вставте свій код">
+									<button class="btn btn--outline" type="button" id="restoreBtn">Відновити</button>
+								</div>
+							</details>
+						</section>
+						<!-- Крок 2: план -->
+						<div class="md-plan" id="plan" hidden>
+							<section class="md-card">
+								<div class="md-card__label">Ваш рунічний код</div>
+								<div class="runes" id="runes"></div>
+								<p class="small md-formula" id="formula"></p>
+							</section>
+							<p class="md-notice" id="notice" role="status" aria-live="polite" hidden></p>
+							<section class="md-card md-today-card" id="todayCard">
+								<div class="today" id="today"></div>
+								<div class="bar">
+									<i id="barFill"></i>
+								</div>
+								<div class="stats">
+									<span id="statDone"></span>
+									<span id="statPlan"></span>
+								</div>
+								<div class="actions">
+									<button class="btn btn--primary" id="markBtn" type="button">Відмітити сьогоднішню медитацію</button>
+									<button class="btn btn--outline" id="undoBtn" type="button">Скасувати сьогоднішню відмітку</button>
+								</div>
+							</section>
+							<section class="md-card">
+								<h2 class="md-card__title">Календар</h2>
+								<p class="small md-card__text">
+									Цикл проходиться
+									<b>3 кола поспіль</b>
+									, щодня без перерви. Відмічати можна лише сьогоднішній день.
+									<b>Пропустили день — цикл починається заново.</b>
+								</p>
+								<div id="calendar"></div>
+							</section>
+							<section class="md-card">
+								<h2 class="md-card__title">Не загубити прогрес</h2>
+								<p class="small md-card__text">
+									Щоб не пропустити день, увімкніть щоденне нагадування в календарі. Прогрес зберігається в цьому браузері. Щоб відкрити його на
+						іншому телефоні, збережіть код — він оновлюється з кожною відміткою.
+								</p>
+								<div class="code-row">
+									<input class="field__input" type="text" id="codeOut" readonly>
+									<button class="btn btn--outline" type="button" id="copyBtn">Копіювати</button>
+								</div>
+								<div class="actions md-reminder">
+									<label class="field md-reminder__time">
+										<span class="field__label">Час нагадування</span>
+										<input class="field__input" type="time" id="remTime" value="08:00">
+									</label>
+									<a class="btn btn--outline" id="gcal" target="_blank" rel="noopener">Додати в Google Календар</a>
+									<button class="btn btn--outline md-reset" type="button" id="resetBtn">Почати заново</button>
+								</div>
+							</section>
+						</div>
+					</div>
+				</section>
+			</main>
+			<footer data-fls-footer="" class="footer">
+				<div class="footer__container">
+					<div class="footer__top">
+						<div class="footer__brand">
+							<a href="#top" class="footer__logo">✦ pro.runes ✦</a>
+							<p class="footer__tagline">
+								Рунічна магія північної традиції — ритуали, розклади та практики, перевірені на собі.
+							</p>
+						</div>
+						<div class="footer__col">
+							<div class="footer__title">Документи</div>
+							<a href="#" class="footer__link">Договір публічної оферти</a>
+							<a href="#" class="footer__link">Гарантія повернення та правила</a>
+							<a href="#" class="footer__link">Політика конфіденційності</a>
+						</div>
+						<div class="footer__col footer__col--right">
+							<div class="footer__title">Контакти</div>
+							<a href="mailto:safr1404@gmail.com" class="footer__link">safr1404@gmail.com</a>
+							<a href="https://t.me/pro_runes_samuraii" class="footer__link" target="_blank" rel="noopener">Telegram</a>
+							<a href="https://instagram.com/pro.runes" class="footer__link" target="_blank" rel="noopener">Instagram</a>
+						</div>
+					</div>
+					<div class="footer__bottom">
+						<span>© 2026 pro.runes. Усі права захищені.</span>
+						<a href="#top" class="footer__up">↑ На початок</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

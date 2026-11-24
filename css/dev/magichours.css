@@ -93,6 +93,18 @@
   font-size: 1.1875rem;
   color: #ece3d0;
   color-scheme: dark;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field__input::-webkit-date-and-time-value {
+  text-align: left;
+  margin: 0;
+}
+.field__input::-webkit-calendar-picker-indicator {
+  filter: invert(70%) sepia(60%) saturate(500%) hue-rotate(5deg);
+  cursor: pointer;
+}
+.field__input {
   transition: border-color 0.25s, box-shadow 0.25s;
 }
 .field__input::placeholder {
@@ -237,7 +249,7 @@
   }
   .ph-hour {
     padding: 0.75rem 1rem;
-    font-size: 1.03125rem;
+    font-size: 1rem;
     grid-template-columns: 1.625rem 1fr auto;
   }
 }

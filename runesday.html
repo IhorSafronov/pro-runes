@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- <link rel="shortcut icon" href="@img/favicon.ico"> -->
+		<link rel="icon" type="image/png" href="./assets/img/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/svg+xml" href="./assets/img/favicon.ico">
+		<link rel="shortcut icon" href="./assets/img/favicon.ico">
+		<link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">
+		<title>Runesday</title>
+		<script type="module" crossorigin="" src="./js/runesday.min.js?v=1795555558292"></script>
+		<link rel="modulepreload" crossorigin="" href="./js/main.min.js?v=1795555558292">
+		<link rel="stylesheet" crossorigin="" href="./css/main.min.css?v=1795555558292">
+		<link rel="stylesheet" crossorigin="" href="./css/runesday.min.css?v=1795555558292">
+	</head>
+	<body>
+		<div class="wrapper">
+			<header data-fls-header="" class="header">
+				<div class="header__container">
+					<div class="header__menu menu">
+						<a href="index.html" class="menu__logo">
+							<img src="./assets/img/logo.svg" alt="logo">
+							<span>pro.runes</span>
+						</a>
+						<nav class="menu__body">
+							<ul class="menu__list">
+								<li class="menu__item">
+									<a href="#" class="menu__link">Головна</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link">Про мене</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link">Розклад</a>
+								</li>
+								<!--
+<li class="menu__item">
+<a href="#" class="menu__link">Відгуки</a>
+</li>
+-->
+								<li class="menu__item">
+									<a href="#" class="menu__link">FAQ</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" class="menu__link menu__link--contact">Контакти</a>
+								</li>
+							</ul>
+						</nav>
+						<button type="button" data-fls-menu="" class="menu__icon icon-menu">
+							<span></span>
+						</button>
+					</div>
+					<!--
+<fetch url="@components/layout/menu/menu.json">
+<each loop='item in response'>
+</each>
+</fetch>
+-->
+				</div>
+			</header>
+			<main class="page page--runesday">
+				<!-- ================= РУННИЙ КАЛЕНДАР ================= -->
+				<section class="rc">
+					<div class="rc__container">
+						<div class="section-head">
+							<div class="section-label section-label--center">Інструменти</div>
+							<h1 class="section-title section-title--center">
+								Рунний
+								<em>календар</em>
+							</h1>
+							<span class="section-divider" aria-hidden="true"></span>
+							<p class="section-sub">
+								Цикл із 25 рун — кожна веде вас 3 дні. Вкажіть дату початку циклу, і я покажу, яка руна з вами сьогодні та що буде далі.
+							</p>
+						</div>
+						<form class="rc__form" id="rcForm" novalidate>
+							<label class="field">
+								<span class="field__label">Дата початку циклу</span>
+								<input class="field__input" type="date" id="rcStart" required>
+							</label>
+							<button class="btn btn--primary rc__submit" type="submit">Розрахувати</button>
+						</form>
+						<p class="rc__message" id="rcMessage" role="status" aria-live="polite" hidden></p>
+						<div class="rc__result" id="rcResult" hidden>
+							<!-- Руна сьогодні -->
+							<article class="rc-today">
+								<div class="rc-today__rune" id="rcGlyph" aria-hidden="true"></div>
+								<div class="rc-today__body">
+									<div class="rc-today__label" id="rcTodayLabel"></div>
+									<h2 class="rc-today__name" id="rcName"></h2>
+									<div class="rc-today__days" id="rcDays"></div>
+									<ul class="rc-today__facts">
+										<li>
+											<span>Руна</span>
+											<b id="rcNum"></b>
+										</li>
+										<li>
+											<span>День циклу</span>
+											<b id="rcCycleDay"></b>
+										</li>
+										<li>
+											<span>Цикл</span>
+											<b id="rcCycle"></b>
+										</li>
+									</ul>
+									<p class="rc-today__next" id="rcNext"></p>
+								</div>
+							</article>
+							<!-- Увесь цикл -->
+							<div class="rc__cycle">
+								<div class="rc__cycle-head">
+									<h3 class="rc__subtitle">Поточний цикл</h3>
+									<span class="rc__range" id="rcRange"></span>
+								</div>
+								<ol class="rc-grid" id="rcGrid"></ol>
+							</div>
+							<!-- Руна на дату -->
+							<div class="rc__lookup">
+								<h3 class="rc__subtitle">Руна на іншу дату</h3>
+								<form class="rc__lookup-form" id="rcLookupForm" novalidate>
+									<label class="field">
+										<span class="field__label">Дата</span>
+										<input class="field__input" type="date" id="rcTarget" required>
+									</label>
+									<button class="btn btn--outline rc__submit" type="submit">Показати руну</button>
+								</form>
+								<div class="rc__lookup-result" id="rcLookupResult" hidden></div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+			<footer data-fls-footer="" class="footer">
+				<div class="footer__container">
+					<div class="footer__top">
+						<div class="footer__brand">
+							<a href="#top" class="footer__logo">✦ pro.runes ✦</a>
+							<p class="footer__tagline">
+								Рунічна магія північної традиції — ритуали, розклади та практики, перевірені на собі.
+							</p>
+						</div>
+						<div class="footer__col">
+							<div class="footer__title">Документи</div>
+							<a href="#" class="footer__link">Договір публічної оферти</a>
+							<a href="#" class="footer__link">Гарантія повернення та правила</a>
+							<a href="#" class="footer__link">Політика конфіденційності</a>
+						</div>
+						<div class="footer__col footer__col--right">
+							<div class="footer__title">Контакти</div>
+							<a href="mailto:safr1404@gmail.com" class="footer__link">safr1404@gmail.com</a>
+							<a href="https://t.me/pro_runes_samuraii" class="footer__link" target="_blank" rel="noopener">Telegram</a>
+							<a href="https://instagram.com/pro.runes" class="footer__link" target="_blank" rel="noopener">Instagram</a>
+						</div>
+					</div>
+					<div class="footer__bottom">
+						<span>© 2026 pro.runes. Усі права захищені.</span>
+						<a href="#top" class="footer__up">↑ На початок</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>
