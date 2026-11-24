@@ -9,9 +9,10 @@
 		<link rel="shortcut icon" href="./assets/img/favicon.ico">
 		<link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">
 		<title>Irk</title>
-		<script type="module" crossorigin="" src="./js/main.min.js?v=1795555558291"></script>
-		<link rel="stylesheet" crossorigin="" href="./css/main.min.css?v=1795555558291">
-		<link rel="stylesheet" crossorigin="" href="./css/irk.min.css?v=1795555558291">
+		<script type="module" crossorigin="" src="./js/irk.min.js?v=1795556963564"></script>
+		<link rel="modulepreload" crossorigin="" href="./js/main.min.js?v=1795556963564">
+		<link rel="stylesheet" crossorigin="" href="./css/main.min.css?v=1795556963564">
+		<link rel="stylesheet" crossorigin="" href="./css/irk.min.css?v=1795556963564">
 	</head>
 	<body>
 		<div class="wrapper">
@@ -58,7 +59,55 @@
 -->
 				</div>
 			</header>
-			<main class="page page--irk"></main>
+			<main class="page page--irk">
+				<!-- ================= ІРК ================= -->
+				<section class="irk">
+					<div class="irk__container">
+						<div class="section-head">
+							<div class="section-label section-label--center">Інструменти</div>
+							<h1 class="section-title section-title--center">
+								Індивідуальний
+								<em>рунічний код</em>
+							</h1>
+							<span class="section-divider" aria-hidden="true"></span>
+							<p class="section-sub">
+								Три руни, що складають ваш код: руна Сутності — за датою народження, руна Особистості — за ім’ям, і Золота руна, що їх поєднує.
+							</p>
+						</div>
+						<form class="irk-form" id="irkForm" novalidate>
+							<label class="field irk-form__dob">
+								<span class="field__label">Дата народження</span>
+								<input class="field__input" type="text" id="irkDob" inputmode="numeric" maxlength="10" placeholder="ДД.ММ.РРРР" autocomplete="bday" required>
+							</label>
+							<label class="field">
+								<span class="field__label">Прізвище</span>
+								<input class="field__input" type="text" id="irkSurname" placeholder="Сафронов · Safronov" autocomplete="family-name" required>
+							</label>
+							<label class="field">
+								<span class="field__label">Ім’я</span>
+								<input class="field__input" type="text" id="irkName" placeholder="Ігор · Ihor" autocomplete="given-name" required>
+							</label>
+							<label class="field" id="irkPatronymicField">
+								<span class="field__label">По батькові</span>
+								<input class="field__input" type="text" id="irkPatronymic" placeholder="Олегович" autocomplete="additional-name">
+							</label>
+							<p class="irk-form__hint" id="irkHint">
+								Пишіть українською, російською або англійською — так, як у документах. Для англійської по батькові не потрібне.
+							</p>
+							<p class="irk-form__error" id="irkError" role="alert" hidden></p>
+							<button class="btn btn--primary irk-form__submit" type="submit">Розрахувати код</button>
+						</form>
+						<div class="irk-result" id="irkResult" hidden>
+							<div class="irk-code" id="irkCode"></div>
+							<div class="irk-cards" id="irkCards"></div>
+							<details class="irk-details">
+								<summary>Як розраховано</summary>
+								<div class="irk-details__body" id="irkDetails"></div>
+							</details>
+						</div>
+					</div>
+				</section>
+			</main>
 			<footer data-fls-footer="" class="footer">
 				<div class="footer__container">
 					<div class="footer__top">
