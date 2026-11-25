@@ -21,30 +21,37 @@ import "./main.min.js";
 	const PLANETS = {
 		sun: {
 			name: "Сонце",
+			gen: "Сонця",
 			sign: "☉"
 		},
 		moon: {
 			name: "Місяць",
+			gen: "Місяця",
 			sign: "☽"
 		},
 		mars: {
 			name: "Марс",
+			gen: "Марса",
 			sign: "♂"
 		},
 		mercury: {
 			name: "Меркурій",
+			gen: "Меркурія",
 			sign: "☿"
 		},
 		jupiter: {
 			name: "Юпітер",
+			gen: "Юпітера",
 			sign: "♃"
 		},
 		venus: {
 			name: "Венера",
+			gen: "Венери",
 			sign: "♀"
 		},
 		saturn: {
 			name: "Сатурн",
+			gen: "Сатурна",
 			sign: "♄"
 		}
 	};
@@ -284,31 +291,67 @@ import "./main.min.js";
 		$("phNightLen").textContent = minutes(nightLen);
 		$("phRuler").innerHTML = `Володар дня — <b>${PLANETS[ruler].sign} ${PLANETS[ruler].name}</b>. Перша година після сходу сонця належить йому, далі планети йдуть у халдейському порядку.`;
 		const now = Date.now();
-		const build = (list, from, len, offset) => {
+		let current = null;
+		const build = (list, from, len, offset, part) => {
 			list.innerHTML = "";
 			for (let i = 0; i < 12; i++) {
 				const a = new Date(from.getTime() + len * i);
 				const b = new Date(from.getTime() + len * (i + 1));
-				const p = PLANETS[CHALDEAN[(start + offset + i) % 7]];
+				const key = CHALDEAN[(start + offset + i) % 7];
+				const p = PLANETS[key];
+				const isNow = now >= a && now < b;
 				const li = document.createElement("li");
-				li.className = "ph-hour" + (now >= a && now < b ? " ph-hour--now" : "");
+				li.className = "ph-hour" + (isNow ? " ph-hour--now" : "");
 				li.innerHTML = `
 					<span class="ph-hour__num">${i + 1}</span>
 					<span class="ph-hour__time">${fmt(a)} – ${fmt(b)}</span>
 					<span class="ph-hour__planet"><span class="ph-hour__sign">${p.sign}</span>${p.name}</span>`;
 				list.appendChild(li);
+				if (isNow) {
+					const nk = CHALDEAN[(start + offset + i + 1) % 7];
+					current = {
+						p,
+						a,
+						b,
+						part,
+						next: PLANETS[nk]
+					};
+				}
 			}
 		};
-		build($("phDay"), sunrise, dayLen, 0);
-		build($("phNight"), sunset, nightLen, 12);
+		build($("phDay"), sunrise, dayLen, 0, "day");
+		build($("phNight"), sunset, nightLen, 12, "night");
+		const nowBox = $("phNow");
+		if (current) {
+			nowBox.innerHTML = `
+				<span class="ph-now__sign" aria-hidden="true">${current.p.sign}</span>
+				<span class="ph-now__body">
+					<span class="ph-now__label">Зараз триває</span>
+					<span class="ph-now__title">Година ${current.p.gen}</span>
+					<span class="ph-now__time">${fmt(current.a)} – ${fmt(current.b)} · далі ${current.next.sign} ${current.next.name} о ${fmt(current.b)}</span>
+				</span>`;
+			nowBox.hidden = false;
+		} else nowBox.hidden = true;
+		showTab(current ? current.part : "day");
 		msg.hidden = true;
 		result.hidden = false;
 		result.classList.remove("is-visible");
 		requestAnimationFrame(() => result.classList.add("is-visible"));
-		const nowRow = result.querySelector(".ph-hour--now");
-		(nowRow || result).scrollIntoView({
+		result.scrollIntoView({
 			behavior: "smooth",
-			block: nowRow ? "center" : "start"
+			block: "start"
+		});
+	}
+	const tabs = document.querySelectorAll(".ph-tabs__btn");
+	tabs.forEach((btn) => btn.addEventListener("click", () => showTab(btn.dataset.tab)));
+	function showTab(name) {
+		tabs.forEach((b) => {
+			const on = b.dataset.tab === name;
+			b.classList.toggle("is-active", on);
+			b.setAttribute("aria-selected", on);
+		});
+		document.querySelectorAll(".ph-table__list").forEach((l) => {
+			l.hidden = l.dataset.panel !== name;
 		});
 	}
 	function minutes(ms) {

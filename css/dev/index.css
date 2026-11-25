@@ -399,6 +399,100 @@
   font-size: 0.625rem;
 }
 
+.contact {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-top: 0.0625rem solid rgba(226, 160, 70, 0.18);
+  background: radial-gradient(ellipse 50% 60% at 50% 45%, rgba(240, 180, 67, 0.07), transparent 70%);
+}
+.contact__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 45rem;
+  margin: 0 auto;
+  padding: 8.125rem 1.875rem;
+  text-align: center;
+}
+.contact__title {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.25rem, 4.4vw, 3.375rem);
+  font-weight: 500;
+  line-height: 1.1;
+  color: #ece3d0;
+}
+.contact__title em {
+  font-style: italic;
+  background: linear-gradient(180deg, #f7c75a 0%, #e2742a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.contact__text {
+  max-width: 32.5rem;
+  margin: 1.5rem 0 2.5rem;
+  font-size: 1.1875rem;
+  line-height: 1.65;
+  color: #a39882;
+}
+.contact__btn {
+  gap: 0.75rem;
+}
+.contact__icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+.contact__handle {
+  margin-top: 1.25rem;
+  font-size: 1.0625rem;
+  color: #a39882;
+  transition: color 0.3s;
+}
+.contact__handle:hover {
+  color: #f0b443;
+}
+.contact__runes {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.contact__runes span {
+  position: absolute;
+  left: var(--x);
+  bottom: -3.75rem;
+  font-family: "Noto Sans Runic", "Cormorant Garamond", Georgia, serif;
+  font-size: var(--s);
+  line-height: 1;
+  color: #f0b443;
+  opacity: 0;
+  text-shadow: 0 0 0.75rem rgba(226, 116, 42, 0.6);
+  animation: rune-float var(--d) linear var(--delay) infinite;
+}
+
+@keyframes rune-float {
+  0% {
+    transform: translateY(0) rotate(-8deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-16.25rem) translateX(0.875rem) rotate(6deg);
+  }
+  85% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-35rem) translateX(-0.625rem) rotate(-4deg);
+    opacity: 0;
+  }
+}
 .reveal {
   opacity: 0;
   transform: translateY(1.5rem);
@@ -462,6 +556,15 @@
   .programs__grid {
     grid-template-columns: 1fr;
   }
+  .contact__container {
+    padding: 5.625rem 1rem;
+  }
+  .contact__title em {
+    display: block;
+  }
+  .contact__runes span:nth-child(2n) {
+    display: none;
+  }
 }
 
 @media (width <= 20em) {
@@ -492,6 +595,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .contact__runes span {
+    animation: none;
+    opacity: 0.2;
+    bottom: 40%;
+  }
   *,
   *::before,
   *::after {

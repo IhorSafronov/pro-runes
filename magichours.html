@@ -9,10 +9,10 @@
 		<link rel="shortcut icon" href="./assets/img/favicon.ico">
 		<link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">
 		<title>Magichours</title>
-		<script type="module" crossorigin="" src="./js/magichours.min.js?v=1795556963562"></script>
-		<link rel="modulepreload" crossorigin="" href="./js/main.min.js?v=1795556963562">
-		<link rel="stylesheet" crossorigin="" href="./css/main.min.css?v=1795556963562">
-		<link rel="stylesheet" crossorigin="" href="./css/magichours.min.css?v=1795556963562">
+		<script type="module" crossorigin="" src="./js/magichours.min.js?v=1795642640438"></script>
+		<link rel="modulepreload" crossorigin="" href="./js/main.min.js?v=1795642640438">
+		<link rel="stylesheet" crossorigin="" href="./css/main.min.css?v=1795642640438">
+		<link rel="stylesheet" crossorigin="" href="./css/magichours.min.css?v=1795642640438">
 	</head>
 	<body>
 		<div class="wrapper">
@@ -26,13 +26,13 @@
 						<nav class="menu__body">
 							<ul class="menu__list">
 								<li class="menu__item">
-									<a href="#" class="menu__link">Головна</a>
+									<a href="index.html" class="menu__link">Головна</a>
 								</li>
 								<li class="menu__item">
-									<a href="#" class="menu__link">Про мене</a>
+									<a href="#" data-fls-scrollto="#about" class="menu__link">Про мене</a>
 								</li>
 								<li class="menu__item">
-									<a href="#" class="menu__link">Розклад</a>
+									<a href="#" data-fls-scrollto="#about" class="menu__link">Розклад</a>
 								</li>
 								<!--
 <li class="menu__item">
@@ -40,10 +40,10 @@
 </li>
 -->
 								<li class="menu__item">
-									<a href="#" class="menu__link">FAQ</a>
+									<a href="#" data-fls-scrollto="#about" class="menu__link">FAQ</a>
 								</li>
 								<li class="menu__item">
-									<a href="#" class="menu__link menu__link--contact">Контакти</a>
+									<a href="#" data-fls-scrollto="#contacts" class="menu__link menu__link--contact">Контакти</a>
 								</li>
 							</ul>
 						</nav>
@@ -109,21 +109,22 @@
 								</li>
 							</ul>
 							<div class="ph__ruler" id="phRuler"></div>
-							<div class="ph__tables">
-								<div class="ph-table">
-									<div class="ph-table__title">
-										<span class="ph-table__icon" aria-hidden="true">☉</span>
-										Денні години
-									</div>
-									<ol class="ph-table__list" id="phDay"></ol>
-								</div>
-								<div class="ph-table">
-									<div class="ph-table__title">
-										<span class="ph-table__icon" aria-hidden="true">☽</span>
-										Нічні години
-									</div>
-									<ol class="ph-table__list" id="phNight"></ol>
-								</div>
+							<!-- Поточна година (лише для сьогоднішньої дати) -->
+							<div class="ph-now" id="phNow" hidden></div>
+							<!-- Таблиця: перемикач день / ніч -->
+							<div class="ph-tabs" role="tablist">
+								<button class="ph-tabs__btn is-active" type="button" role="tab" aria-selected="true" data-tab="day">
+									<span aria-hidden="true">☉</span>
+									Денні години
+								</button>
+								<button class="ph-tabs__btn" type="button" role="tab" aria-selected="false" data-tab="night">
+									<span aria-hidden="true">☽</span>
+									Нічні години
+								</button>
+							</div>
+							<div class="ph-table">
+								<ol class="ph-table__list" id="phDay" data-panel="day"></ol>
+								<ol class="ph-table__list" id="phNight" data-panel="night" hidden></ol>
 							</div>
 						</div>
 					</div>
