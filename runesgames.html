@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- <link rel="shortcut icon" href="@img/favicon.ico"> -->
+		<link rel="icon" type="image/png" href="./assets/img/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/svg+xml" href="./assets/img/favicon.ico">
+		<link rel="shortcut icon" href="./assets/img/favicon.ico">
+		<link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">
+		<title>Runesgames</title>
+		<script type="module" crossorigin="" src="./js/runesgames.min.js?v=1795864032784"></script>
+		<link rel="modulepreload" crossorigin="" href="./js/main.min.js?v=1795864032784">
+		<link rel="stylesheet" crossorigin="" href="./css/main.min.css?v=1795864032784">
+		<link rel="stylesheet" crossorigin="" href="./css/runesgames.min.css?v=1795864032784">
+	</head>
+	<body>
+		<div class="wrapper">
+			<header data-fls-header="" class="header">
+				<div class="header__container">
+					<div class="header__menu menu">
+						<a href="index.html" class="menu__logo">
+							<img src="./assets/img/logo.svg" alt="logo">
+							<span>pro.runes</span>
+						</a>
+						<nav class="menu__body">
+							<ul class="menu__list">
+								<li class="menu__item">
+									<a href="index.html" class="menu__link">Головна</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" data-fls-scrollto="#about" class="menu__link">Про мене</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" data-fls-scrollto="#tools" class="menu__link">Практики</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" data-fls-scrollto="#programs" class="menu__link">Взаємодія</a>
+								</li>
+								<li class="menu__item">
+									<a href="runesgames.html" class="menu__link">Quiz</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" data-fls-scrollto="#faq" class="menu__link">FAQ</a>
+								</li>
+								<li class="menu__item">
+									<a href="#" data-fls-scrollto="#contacts" class="menu__link menu__link--contact">Контакти</a>
+								</li>
+							</ul>
+						</nav>
+						<button type="button" data-fls-menu="" class="menu__icon icon-menu">
+							<span></span>
+						</button>
+					</div>
+					<!--
+<fetch url="@components/layout/menu/menu.json">
+<each loop='item in response'>
+</each>
+</fetch>
+-->
+				</div>
+			</header>
+			<main class="page page--runesgames">
+				<!-- ================= ІГРИ: ВИВЧАЙ РУНИ ================= -->
+				<section class="games">
+					<div class="games__container">
+						<div class="section-head">
+							<div class="section-label section-label--center">Навчання</div>
+							<h1 class="section-title section-title--center">
+								Вивчай руни
+								<em>граючи</em>
+							</h1>
+							<span class="section-divider" aria-hidden="true"></span>
+							<p class="section-sub">
+								Три гри, щоб запам’ятати 24 руни Старшого футарку: форму, назву і значення. Прогрес зберігається у вашому браузері.
+							</p>
+						</div>
+						<!-- Загальний прогрес -->
+						<div class="games-progress">
+							<div class="games-progress__top">
+								<span class="games-progress__label">Вивчено рун</span>
+								<span class="games-progress__count">
+									<b id="gmLearned">0</b>
+									/ 24
+								</span>
+							</div>
+							<div class="games-progress__bar">
+								<span id="gmBar"></span>
+							</div>
+							<button class="games-progress__reset" type="button" id="gmReset">Скинути прогрес</button>
+						</div>
+						<!-- Вибір гри -->
+						<div class="games-tabs" role="tablist">
+							<button class="games-tab is-active" type="button" role="tab" aria-selected="true" data-game="cards">
+								<span class="games-tab__icon" aria-hidden="true">ᚠ</span>
+								<span class="games-tab__title">Картки</span>
+								<span class="games-tab__text">Переверніть картку — назва, звук і значення. Позначайте, що вже знаєте.</span>
+							</button>
+							<button class="games-tab" type="button" role="tab" aria-selected="false" data-game="memory">
+								<span class="games-tab__icon" aria-hidden="true">ᚷ</span>
+								<span class="games-tab__title">Знайди пару</span>
+								<span class="games-tab__text">Відкривайте картки й шукайте пари «руна — назва». Менше ходів — краще.</span>
+							</button>
+							<button class="games-tab" type="button" role="tab" aria-selected="false" data-game="quiz">
+								<span class="games-tab__icon" aria-hidden="true">ᚨ</span>
+								<span class="games-tab__title">Квіз</span>
+								<span class="games-tab__text">10 питань «Яка це руна?». Перевірте себе і поставте рекорд.</span>
+							</button>
+						</div>
+						<!-- Ігрове поле: вміст малює скрипт -->
+						<div class="games-stage">
+							<div class="games-panel" id="gmCards" data-panel="cards"></div>
+							<div class="games-panel" id="gmMemory" data-panel="memory" hidden></div>
+							<div class="games-panel" id="gmQuiz" data-panel="quiz" hidden></div>
+						</div>
+						<!-- Конкурс -->
+						<!--
+<div class="games-contest">
+<span class="games-contest__rune" aria-hidden="true">ᛊ</span>
+<div class="section-label section-label--center">Конкурси</div>
+<h2 class="games-contest__title">Щотижневий квіз <em>у Telegram</em></h2>
+<p class="games-contest__text">
+Тренуйтесь тут — змагайтесь у каналі. Щотижня нові питання про руни, а найуважніші отримують розклад у подарунок.
+</p>
+<a href="https://t.me/pro_runes_samuraii" class="btn btn--primary" target="_blank" rel="noopener">Перейти в Telegram</a>
+<p class="games-contest__more">Хочете не лише знати руни, а працювати з ними? <a href="index.html#programs">Подивіться курс</a></p>
+</div>
+-->
+					</div>
+				</section>
+			</main>
+			<!-- ================= КОНТАКТ ================= -->
+			<section data-fls-contacts="" class="contact" id="contacts">
+				<div class="contact__runes" aria-hidden="true">
+					<span style="--x: 6%; --d: 22s; --delay: 0s; --s: 14px">ᚨ</span>
+					<span style="--x: 14%; --d: 28s; --delay: -6s; --s: 18px">ᚠ</span>
+					<span style="--x: 24%; --d: 25s; --delay: -14s; --s: 12px">ᛉ</span>
+					<span style="--x: 33%; --d: 30s; --delay: -3s; --s: 16px">ᚱ</span>
+					<span style="--x: 45%; --d: 33s; --delay: -24s; --s: 11px">ᚹ</span>
+					<span style="--x: 63%; --d: 27s; --delay: -9s; --s: 20px">ᛟ</span>
+					<span style="--x: 72%; --d: 24s; --delay: -17s; --s: 13px">ᚲ</span>
+					<span style="--x: 81%; --d: 29s; --delay: -4s; --s: 17px">ᛏ</span>
+					<span style="--x: 90%; --d: 26s; --delay: -12s; --s: 15px">ᛒ</span>
+					<span style="--x: 96%; --d: 31s; --delay: -20s; --s: 12px">ᛃ</span>
+				</div>
+				<div class="contact__container">
+					<h2 class="contact__title">
+						Є питання?
+						<em>Напишіть мені</em>
+					</h2>
+					<p class="contact__text">
+						Розкажіть, з чим прийшли, — підкажу, який формат підійде саме вам. Перше повідомлення ні до чого не зобов’язує.
+					</p>
+					<a href="https://t.me/pro_runes_samuraii" class="btn btn--primary contact__btn" target="_blank" rel="noopener">
+						<svg class="contact__icon" viewbox="0 0 24 24" aria-hidden="true">
+							<path d="M21.4 3.6 2.9 10.8c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.4l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.4-1.5ZM9.6 13.9l8.6-5.4c.4-.3.8-.1.5.2l-7.3 6.6-.3 3.1-1.5-4.5Z"></path>
+						</svg>
+						Написати в Telegram
+					</a>
+					<a href="https://t.me/pro_runes_samuraii" class="contact__handle" target="_blank" rel="noopener">@pro_runes_samuraii</a>
+				</div>
+			</section>
+			<footer data-fls-footer="" class="footer">
+				<div class="footer__container">
+					<div class="footer__top">
+						<div class="footer__brand">
+							<a href="#top" class="footer__logo">✦ pro.runes ✦</a>
+							<p class="footer__tagline">
+								Рунічна магія північної традиції — ритуали, розклади та практики, перевірені на собі.
+							</p>
+						</div>
+						<div class="footer__col">
+							<div class="footer__title">Документи</div>
+							<a href="#" class="footer__link">Договір публічної оферти</a>
+							<a href="#" class="footer__link">Гарантія повернення та правила</a>
+							<a href="#" class="footer__link">Політика конфіденційності</a>
+						</div>
+						<div class="footer__col footer__col--right">
+							<div class="footer__title">Контакти</div>
+							<a href="mailto:safr1404@gmail.com" class="footer__link">safr1404@gmail.com</a>
+							<a href="https://t.me/pro_runes_samuraii" class="footer__link" target="_blank" rel="noopener">Telegram</a>
+							<a href="https://instagram.com/pro.runes" class="footer__link" target="_blank" rel="noopener">Instagram</a>
+						</div>
+					</div>
+					<div class="footer__bottom">
+						<span>© 2026 pro.runes. Усі права захищені.</span>
+						<a href="#top" class="footer__up">↑ На початок</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>
