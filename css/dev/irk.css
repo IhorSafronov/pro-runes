@@ -98,15 +98,44 @@
 
 .irk-card {
   position: relative;
+  perspective: 100rem;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.irk-card__flip {
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.45, 0.05, 0.25, 1);
+  will-change: transform;
+}
+.irk-card.is-flipped .irk-card__flip {
+  transform: rotateY(180deg);
+}
+.irk-card__face {
+  grid-area: 1/1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.75rem 1.5rem 1.875rem;
+  padding: 1.75rem 1.5rem 1.625rem;
   border: 0.0625rem solid rgba(226, 160, 70, 0.18);
-  background: rgba(13, 16, 32, 0.7);
+  background: rgba(13, 16, 32, 0.92);
   text-align: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: rotateY(0deg) translateZ(0.0625rem);
+  will-change: transform;
+  transition: border-color 0.3s;
 }
-.irk-card--golden {
+.irk-card__face--back {
+  justify-content: center;
+  padding: 2.125rem 1.75rem 1.625rem;
+  transform: rotateY(180deg) translateZ(0.0625rem);
+}
+.irk-card:hover .irk-card__face, .irk-card:focus-visible .irk-card__face {
+  border-color: rgba(226, 160, 70, 0.42);
+}
+.irk-card--golden .irk-card__face {
   border-color: rgba(226, 160, 70, 0.42);
   background: radial-gradient(100% 60% at 50% 0%, rgba(240, 180, 67, 0.16), transparent 70%), linear-gradient(180deg, #17120b, #0e0b08);
   box-shadow: 0 0 3.125rem rgba(240, 180, 67, 0.12);
@@ -155,15 +184,11 @@
   border-radius: 40% 40% 34% 34%/22% 22% 18% 18%;
   box-shadow: inset 0 0 2.5rem rgba(240, 180, 67, 0.08);
 }
-.irk-card__sign {
-  position: absolute;
-  left: 50%;
-  bottom: -1.625rem;
+.irk-card__sign, .irk-card__back-sign {
   display: grid;
   place-items: center;
   width: 4rem;
   height: 4rem;
-  transform: translateX(-50%);
   border: 0.0625rem solid rgba(226, 160, 70, 0.42);
   border-radius: 50%;
   background: #03050c;
@@ -173,6 +198,15 @@
   color: #f0b443;
   text-shadow: 0 0 0.875rem rgba(240, 180, 67, 0.6);
   box-shadow: 0 0 1.5rem rgba(240, 180, 67, 0.2);
+}
+.irk-card__sign {
+  position: absolute;
+  left: 50%;
+  bottom: -1.625rem;
+  transform: translateX(-50%);
+}
+.irk-card__back-sign {
+  margin: 1.125rem 0 0.875rem;
 }
 .irk-card__name {
   font-family: "Cormorant Garamond", Georgia, serif;
@@ -188,6 +222,39 @@
   margin-top: 0.625rem;
   text-transform: uppercase;
   color: #a39882;
+}
+.irk-card__keys {
+  margin: 0.75rem 0 0;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f0b443;
+}
+.irk-card__position {
+  margin: 1.125rem 0 0;
+  padding-top: 1rem;
+  border-top: 0.0625rem solid rgba(226, 160, 70, 0.18);
+  font-size: 0.96875rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: #a39882;
+}
+.irk-card__text {
+  margin: 0.875rem 0 0;
+  font-size: 1.09375rem;
+  line-height: 1.65;
+  color: #ece3d0;
+}
+.irk-card__hint {
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(240, 180, 67, 0.6);
+  transition: color 0.3s;
+}
+.irk-card:hover .irk-card__hint {
+  color: #f0b443;
 }
 
 .irk-blank {
@@ -294,5 +361,10 @@
   }
   .irk-details__body li {
     grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .irk-card__flip {
+    transition: none;
   }
 }
