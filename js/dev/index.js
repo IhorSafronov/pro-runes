@@ -227,6 +227,18 @@ var ScrollWatcher = class {
 	}
 };
 document.querySelector("[data-fls-watcher]") && window.addEventListener("load", () => new ScrollWatcher({}));
+// src/components/custom/bannergame/bannergame.js
+(function() {
+	const el = document.querySelector("[data-quiz-progress]");
+	if (!el) return;
+	let learned = [];
+	try {
+		learned = JSON.parse(localStorage.getItem("prorunes_learned")) || [];
+	} catch (e) {}
+	if (!learned.length) return;
+	el.innerHTML = learned.length >= 24 ? "Ви вже знаєте <b>усі 24</b> руни" : `Ви вже вивчили <b>${learned.length}</b> з 24 рун`;
+	el.hidden = false;
+})();
 // src/components/pages/index/index.js
 (function() {
 	const canvas = document.getElementById("sky");
